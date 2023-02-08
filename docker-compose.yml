@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  postgres_test:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=service_template_go_test
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5433:5432"
+  postgres_development:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=service_template_go_development
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - "5434:5432"

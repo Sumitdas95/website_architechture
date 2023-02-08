@@ -1,0 +1,51 @@
+run:
+  # Force golangci-lint to pass `mod=vendor` as needed.
+  modules-download-mode: vendor
+  # timeout for analysis, e.g. 30s, 5m, default is 1m
+  timeout: 5m
+  # include test files or not, default is true
+  tests: true
+  issues-exit-code: 1
+
+issues:
+  fix: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+
+linters:
+  enable-all: true
+  disable:
+    - cyclop
+    - exhaustruct
+    - exhaustivestruct
+    - gci
+    - gocognit
+    - godot
+    - godox
+    - goerr113
+    - govet # This is run as part of go test.
+    - ireturn
+    - lll
+    - maintidx
+    - maligned
+    - nestif
+    - nilnil
+    - nlreturn
+    - nonamedreturns
+    - paralleltest
+    - testpackage
+    - varnamelen
+    - wsl
+    # Deprecated linters
+    - deadcode
+    - golint
+    - ifshort
+    - interfacer
+    - nosnakecase
+    - scopelint
+    - structcheck
+    - varcheck
+
+linters-settings:
+  cyclop:
+    max-complexity: 20

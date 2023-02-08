@@ -1,0 +1,18 @@
+run:
+  # Force golangci-lint to pass `mod=vendor` as needed.
+  # modules-download-mode: vendor
+
+linters:
+  enable:
+    - deadcode
+    - errcheck
+    - goimports
+    - govet
+    - revive
+    - unconvert
+    - varcheck
+    - staticcheck
+
+linters-settings:
+  govet:
+    check-shadowing: true

@@ -1,0 +1,25 @@
+# Generated binaries
+bin/
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# IDE Files
+.idea/
+*.iml
+
+# VSCode files
+.vscode/
+
+# Local dev env file
+.env.dev.local
+
+# Terraform
+**/.terraform/**

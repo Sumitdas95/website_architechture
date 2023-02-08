@@ -1,0 +1,8 @@
+version: "1"
+scopes:
+  test-sonarqube-production:
+    project_root: "./infrastructure"
+    shards: [global]
+  test-sonarqube-staging:
+    project_root: "./infrastructure"
+    shards: [global]

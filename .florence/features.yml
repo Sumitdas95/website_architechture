@@ -1,0 +1,6 @@
+---
+example_feature_flag:
+  description: >
+    This is an example feature flag used in the Go service template.
+  tags:
+    - 'go-service-template'

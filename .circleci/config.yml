@@ -1,0 +1,204 @@
+version: 2.1
+
+commands:
+  setup_docker:
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+          reusable: true
+          version: 20.10.7
+      # Docker Hub rate limits unauthenticated requests.
+      - run:
+          name: Authenticate with hub.docker.com
+          command: docker login -u $GLOBAL_DOCKERHUB_USERNAME -p $GLOBAL_DOCKERHUB_PASSWORD
+
+global_context: &global_context
+  context:
+    - org-global
+
+global_dockerhub_auth: &global_dockerhub_auth
+  auth:
+    username: $GLOBAL_DOCKERHUB_USERNAME
+    password: $GLOBAL_DOCKERHUB_PASSWORD
+
+executors:
+  roo-container:
+    docker:
+      - image: deliveroo/circleci:latest
+        <<: *global_dockerhub_auth
+
+lint_generate: &lint_generate_steps
+  steps:
+    - checkout
+    - setup_docker
+    - run:
+        name: Build composition
+        command: ci build
+    - run:
+        name: Ensure go code is generated consistently
+        command: |
+          ci run -u 0 --rm app sh -c 'make generate && git status; if ! git diff-index --exit-code HEAD --name-only > /dev/null; then echo "Changes found after regenerating files:"; git diff-index --exit-code HEAD --name-only; fi'
+
+lint_steps: &lint_steps
+  steps:
+    - checkout
+    - setup_docker
+    - run:
+        name: Build composition
+        command: ci build
+    - run:
+        name: Run linter
+        command: ci run --rm app make lint
+
+test_steps: &test_steps
+  steps:
+    - checkout
+    - setup_docker
+    - run:
+        name: Build composition
+        command: ci build
+    - run:
+        name: Run test suite
+        command: ci run --rm app make test
+
+build_steps: &build_steps
+  steps:
+    - checkout
+    - setup_docker
+    # Control the build from `docker-compose.ci.yml`
+    # Tag the image using the environment from hopper and circle
+    - run:
+        name: Build and Tag CI Image
+        command: |
+          ci build
+          ci tag
+    # Just because the docker instance is reusable, doesn't mean it will always be used.
+    # Persist the image between Steps by saving it to the workspace.
+    - run:
+        name: Save CI Image
+        command: |
+          mkdir -p workspace
+          docker save "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
+              --output "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
+    - persist_to_workspace:
+        root: workspace
+        paths:
+          - "*.tar"
+
+push_steps: &push_steps
+  steps:
+    - attach_workspace:
+        at: workspace
+    - setup_docker
+    - run:
+        name: Load persisted CI image
+        command: |
+          docker load --input "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
+    - run:
+        name: Push image to ECR
+        command: |
+          `print_env ${TARGET}`
+          push_image_to_ecr
+
+
+scan_image_steps: &scan_image_steps
+  steps:
+    - setup_docker
+    - checkout
+    - attach_workspace:
+        at: workspace
+    - run:
+        name: Load cached CI image
+        command: |
+          docker load --input "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
+
+    - run:
+        name: Scan
+        command: scan_container_vulnerabilities --run
+
+push_dependencies: &push_dependencies
+  requires:
+    - lint
+    - lint_generate
+    - test
+    - build
+
+scan_dependencies: &scan_dependencies
+  requires:
+    - build
+
+filter_staging: &filter_staging
+  filters:
+    branches:
+      only:
+        - staging
+
+filter_main: &filter_main
+  filters:
+    branches:
+      only:
+        - main
+
+jobs:
+  lint:
+    executor: roo-container
+    <<: *lint_steps
+
+  lint_generate:
+    executor: roo-container
+    <<: *lint_generate_steps
+
+  test:
+    executor: roo-container
+    <<: *test_steps
+
+  build:
+    executor: roo-container
+    <<: *build_steps
+
+  push_staging:
+    executor: roo-container
+    environment:
+      TARGET: staging
+    <<: *push_steps
+
+  push_production:
+    executor: roo-container
+    environment:
+      TARGET: production
+    <<: *push_steps
+
+  scan_image:
+    executor: roo-container
+    <<: *scan_image_steps
+
+workflows:
+  version: 2
+
+  build_and_push:
+    jobs:
+      - lint:
+          <<: *global_context
+
+      - lint_generate:
+          <<: *global_context
+
+      - test:
+          <<: *global_context
+
+      - build:
+          <<: *global_context
+
+      - push_staging:
+          <<: *global_context
+          <<: *push_dependencies
+          <<: *filter_staging
+
+      - push_production:
+          <<: *global_context
+          <<: *push_dependencies
+          <<: *filter_main
+
+      - scan_image:
+          <<: *global_context
+          <<: *scan_dependencies
