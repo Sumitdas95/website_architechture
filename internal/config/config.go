@@ -40,7 +40,7 @@ type Settings struct {
 
 // Hopper contains parameters injected from Hopper.
 type Hopper struct {
-	AppName     string `envconfig:"HOPPER_APP_NAME" default:"test-sonarqube"`
+	AppName     string `envconfig:"HOPPER_APP_NAME" default:"bnt-internal-test-go"`
 	Environment string `envconfig:"HOPPER_ENVIRONMENT" default:"development"`
 	ReleaseID   string `envconfig:"HOPPER_RELEASE_ID"`
 	ServiceName string `envconfig:"HOPPER_SERVICE_NAME"`
@@ -54,7 +54,7 @@ type Database struct {
 
 // Datadog contains configuration for the Datadog APM.
 type Datadog struct {
-	AppName     string `envconfig:"HOPPER_APP_NAME" default:"test-sonarqube"`
+	AppName     string `envconfig:"HOPPER_APP_NAME" default:"bnt-internal-test-go"`
 	ServiceName string `envconfig:"HOPPER_SERVICE_NAME" default:"app"`
 	Env         string `envconfig:"STATSD_ENV" default:"development"`
 	Host        string `envconfig:"STATSD_HOST"`

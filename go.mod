@@ -1,4 +1,4 @@
-module github.com/deliveroo/test-sonarqube
+module github.com/deliveroo/bnt-internal-test-go
 
 go 1.19
 

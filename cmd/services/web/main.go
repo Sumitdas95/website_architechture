@@ -12,9 +12,9 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/deliveroo/test-sonarqube/internal/config"
-	"github.com/deliveroo/test-sonarqube/internal/dependencies"
-	"github.com/deliveroo/test-sonarqube/internal/httpserver"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/dependencies"
+	"github.com/deliveroo/bnt-internal-test-go/internal/httpserver"
 )
 
 func main() {

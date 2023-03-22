@@ -2,13 +2,13 @@
 
 ## Deploying infrastructure
 
-Out of the box, `test-sonarqube` will deploy to the Global shard. Below will describe documentation and links to
+Out of the box, `bnt-internal-test-go` will deploy to the Global shard. Below will describe documentation and links to
 deploy your infrastructure and project for the first time. If you require deploying to additional shards, please follow
 up by reading the [Geosharding](#geosharding) below.
 
-1. Update any references to `test-sonarqube` with the infrastructure directory to the name of your newly created
+1. Update any references to `bnt-internal-test-go` with the infrastructure directory to the name of your newly created
    repository. Failure to update something will result in the deployment failing due to the infrastructure already existing
-   (e.g. test-sonarqube.)
+   (e.g. bnt-internal-test-go.)
 
 2. [Geopoiesis](https://github.com/deliveroo/geopoiesis) is the repository which will
    deploy your changes. You will need to configure this repository by following

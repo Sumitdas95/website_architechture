@@ -4,7 +4,7 @@ provider "datadog" {
 }
 
 provider "aws" {
-  region = "eu-west-1"
+  region = var.region
 
   default_tags {
     tags = data.roo_tags.defaults.aws_tags
@@ -16,12 +16,16 @@ provider "aws" {
   }
 }
 
-data roo_market_entries "all" {}
+provider "circleci" {}
+
+provider "hopper" {}
+
 data "roo_aws_account" "current" {}
+
 data "roo_tags" "defaults" {}
 
 provider "roo" {
-  default_ownership_group = "the-go-team"
+  default_ownership_group = "prodeng"
   default_env_name        = var.env_name
   default_shard_name      = var.shard
 }

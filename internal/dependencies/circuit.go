@@ -6,7 +6,7 @@ import (
 	"github.com/cep21/circuit/v3"
 	"github.com/cep21/circuit/v3/closers/hystrix"
 
-	"github.com/deliveroo/test-sonarqube/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
 )
 
 // newCircuitBreakerManager sets up the circuit breaker manager, allows the setup

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/deliveroo/apm-go"
-	"github.com/deliveroo/test-sonarqube/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
 )
 
 func NewAPM(cfg *config.Config, opts ...apm.Option) (apm.Service, error) {

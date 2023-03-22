@@ -6,7 +6,7 @@ import (
 	"github.com/cep21/circuit/v3"
 
 	"github.com/deliveroo/apm-go"
-	"github.com/deliveroo/test-sonarqube/internal/httpclient/circuitbreaker"
+	"github.com/deliveroo/bnt-internal-test-go/internal/httpclient/circuitbreaker"
 )
 
 type Middleware func(c *http.Client) *http.Client

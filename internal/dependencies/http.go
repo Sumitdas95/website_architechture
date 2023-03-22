@@ -9,8 +9,8 @@ import (
 	"github.com/cep21/circuit/v3"
 
 	"github.com/deliveroo/apm-go"
-	"github.com/deliveroo/test-sonarqube/internal/config"
-	"github.com/deliveroo/test-sonarqube/internal/httpclient"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/httpclient"
 )
 
 const circuitBreakerNamePrefix = "httpclient.circuit."

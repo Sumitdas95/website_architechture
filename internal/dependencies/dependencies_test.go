@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/deliveroo/test-sonarqube/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
 )
 
 func TestDependencies(t *testing.T) {
