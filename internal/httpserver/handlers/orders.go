@@ -29,18 +29,7 @@ func (o *OrderHandlers) Get(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
+	temp := Order{orderID, "FULFILLED"}
 
-	context := r.Context()
-	order, err := o.Repository.GetOrder(context, orderID)
-	if err != nil {
-		w.WriteHeader(http.StatusInternalServerError)
-		return
-	}
-
-	if order == nil {
-		w.WriteHeader(http.StatusNotFound)
-		return
-	}
-
-	_ = gorillautils.RenderJSON(w, order)
+	_ = gorillautils.RenderJSON(w, temp)
 }
