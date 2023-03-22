@@ -6,5 +6,5 @@ services:
     taskDefinition:
       containerDefinitions:
         - name: web
-          cpu: "{{ ternary 6144 2048 (eq .environment 'platform') }}"
-          memory: "{{ ternary 16384 4096 (eq .environment 'platform') }}"
+          cpu: 128
+          memory: 256
