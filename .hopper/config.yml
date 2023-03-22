@@ -1,32 +1,10 @@
 version: 2
 
-web_resources: &web_resources
-  cpu: 64
-  memory: 64
-
 services:
   - type: Hopper::Services::ECS::Service
-    name: example
+    name: web
     taskDefinition:
       containerDefinitions:
-        - name: example
-          <<: *web_resources
-          command: 'web'
-          essential: true
-
-workflow:
-  type: Hopper::Workflow::Flows::Basic
-  name: Basic workflow
-  shardsToDeploy:
-    - global
-#
-# Uncomment any below shards to allow hopper to attempt deployment. Ensure
-# Geopoiesis has deployed to those shards before updating this document.
-#
-# https://deliveroo.atlassian.net/wiki/spaces/GEO/pages/3663659074/Shard-Market+Mapping
-#
-#    - mle-01
-#    - eur-01
-#    - apc-01
-#    - fra-01
-#    - gbr-01
+        - name: web
+          cpu: 128
+          memory: 256

@@ -21,9 +21,9 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/deliveroo/apm-go"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/orders"
 	"github.com/deliveroo/determinator-go"
-	"github.com/deliveroo/test-sonarqube/internal/config"
-	"github.com/deliveroo/test-sonarqube/internal/orders"
 )
 
 // Dependencies groups all application dependencies together, for easy start-up.

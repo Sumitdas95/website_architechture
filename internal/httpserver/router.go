@@ -4,8 +4,8 @@ import (
 	"github.com/gorilla/mux"
 
 	"github.com/deliveroo/apm-go/integrations/gorillatrace"
-	"github.com/deliveroo/test-sonarqube/internal/dependencies"
-	"github.com/deliveroo/test-sonarqube/internal/httpserver/handlers"
+	"github.com/deliveroo/bnt-internal-test-go/internal/dependencies"
+	"github.com/deliveroo/bnt-internal-test-go/internal/httpserver/handlers"
 )
 
 func NewRouter(deps *dependencies.Dependencies) *mux.Router {

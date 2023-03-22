@@ -7,7 +7,7 @@ to be in line with current Deliveroo standards and be the ideal Go service templ
 
 A work in progress Go in Deliveroo/Best Practices can be found
 within [go/docs](https://deliveroo.atlassian.net/wiki/spaces/EN/pages/3856604593/Golang+Deliveroo).
-# test-sonarqube
+# bnt-internal-test-go
 
 This template aims to provide a standard way to develop a new Go service at
 Deliveroo.
@@ -107,7 +107,7 @@ For more information about standard project layout at Deliveroo please see [go-p
 There's lots to do and lots of decisions to make. We're trying to use the issue
 tracker to help facilitate that discussion - please do get involved! You can
 find us on Slack at
-[#test-sonarqube](https://deliveroo.slack.com/messages/CHTQ08WAC).
+[#bnt-internal-test-go](https://deliveroo.slack.com/messages/CHTQ08WAC).
 
 Pull requests are open and welcome, but we'd encourage you to discuss ideas
 first before putting in the time to implement them. It might be a good idea to
@@ -227,7 +227,7 @@ There are two options:
 You can test the configuration like this:
 
 ```bash
-git ls-remote --get-url https://github.com/deliveroo/test-sonarqube.git
+git ls-remote --get-url https://github.com/deliveroo/bnt-internal-test-go.git
 ```
 
 ## How to register pgx codecs
