@@ -9,7 +9,7 @@ WEB_SERVER_BINARY=$(GOBIN)/web
 MAKEFLAGS += --silent
 
 .PHONY: start
-start: start-containers install start-server ## Start the server.
+start: install start-server ## Start the server.
 
 .PHONY: start-server
 start-server: install

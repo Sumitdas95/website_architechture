@@ -1,13 +1,6 @@
 version: '3.4'
 
 services:
-  db:
-    image: postgres:15.1
-    environment:
-      POSTGRES_USER: db_user
-      POSTGRES_PASSWORD: db_pass
-      POSTGRES_DB: db_name
-
   # to use the wait-for-it helper on CircleCI
   wait:
     image: deliveroo/circleci:latest
@@ -21,9 +14,3 @@ services:
     working_dir: /app
     environment:
       - APP_ENV=test
-      - DATABASE_URL=postgres://db_user:db_pass@db/db_name?sslmode=disable
-      - DATABASE_URL_READER=postgres://db_user:db_pass@db/db_name?sslmode=disable
-    links:
-      - db
-    depends_on:
-      - db
