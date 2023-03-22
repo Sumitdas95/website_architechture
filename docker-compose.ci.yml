@@ -4,8 +4,6 @@ services:
   # to use the wait-for-it helper on CircleCI
   wait:
     image: deliveroo/circleci:latest
-    links:
-      - db
 
   app:
     build:
