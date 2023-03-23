@@ -1,10 +1,28 @@
 version: 2
-
 services:
   - type: Hopper::Services::ECS::Service
     name: web
     taskDefinition:
       containerDefinitions:
-        - name: web
+        - command: web
           cpu: 128
+          essential: true
           memory: 256
+          name: web
+
+workflow:
+  type: Hopper::Workflow::Flows::Basic
+  name: roo-generate-workflow
+  shardsToDeploy:
+    - global
+  actions:
+    - type: Hopper::Workflow::Deployment::Services
+      name: roo-generate deploy-step-1
+      runOrder: 1
+      servicesToInclude:
+        - web
+    - type: Hopper::Workflow::Deployment::Services
+      name: roo-generate deploy-step-2
+      runOrder: 2
+      servicesToExclude:
+        - web
