@@ -127,17 +127,11 @@ scan_dependencies: &scan_dependencies
   requires:
     - build
 
-filter_staging: &filter_staging
+filter_sandbox: &filter_sandbox
   filters:
     branches:
       only:
-        - staging
-
-filter_main: &filter_main
-  filters:
-    branches:
-      only:
-        - main
+        - sandbox
 
 jobs:
   lint:
@@ -156,16 +150,10 @@ jobs:
     executor: roo-container
     <<: *build_steps
 
-  push_staging:
+  push_sandbox:
     executor: roo-container
     environment:
-      TARGET: staging
-    <<: *push_steps
-
-  push_production:
-    executor: roo-container
-    environment:
-      TARGET: production
+      TARGET: sandbox
     <<: *push_steps
 
   scan_image:
@@ -189,15 +177,10 @@ workflows:
       - build:
           <<: *global_context
 
-      - push_staging:
+      - push_sandbox:
           <<: *global_context
           <<: *push_dependencies
-          <<: *filter_staging
-
-      - push_production:
-          <<: *global_context
-          <<: *push_dependencies
-          <<: *filter_main
+          <<: *filter_sandbox
 
       - scan_image:
           <<: *global_context
