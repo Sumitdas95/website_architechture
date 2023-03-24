@@ -82,13 +82,6 @@ type Circuit struct {
 	ErrorPercentThreshold  int `envconfig:"HTTP_CIRCUIT_ERROR_PERCENT_THRESHOLD"`
 }
 
-// Sentry contains configuration for Sentry's error reporting.
-type Sentry struct {
-	DSN     string `envconfig:"SENTRY_DSN"`
-	Env     string `envconfig:"SENTRY_ENVIRONMENT"`
-	Release string `envconfig:"SENTRY_RELEASE"`
-}
-
 // Config is the global config struct.
 type Config struct {
 	Env          string // APP_ENV
@@ -99,7 +92,6 @@ type Config struct {
 	Datadog      Datadog
 	Circuit      Circuit
 	Determinator Determinator
-	Sentry       Sentry
 }
 
 // Load configuration from environment.
