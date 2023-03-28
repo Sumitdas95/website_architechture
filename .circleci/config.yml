@@ -41,12 +41,6 @@ commands:
           name: Authenticate with hub.docker.com
           command: docker login -u $GLOBAL_DOCKERHUB_USERNAME -p $GLOBAL_DOCKERHUB_PASSWORD
 
-  executors:
-    roo-container:
-      docker:
-        - image: deliveroo/circleci:latest
-          <<: *global_dockerhub_auth
-
   install-engine:
     description: "Install Sonarqube scanner"
     steps:
@@ -55,6 +49,12 @@ commands:
           command: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARQUBE_SCANNER_VERSION}.zip
             unzip sonar-scanner-cli-${SONARQUBE_SCANNER_VERSION}.zip
+
+executors:
+  roo-container:
+    docker:
+      - image: deliveroo/circleci:latest
+        <<: *global_dockerhub_auth
 
 lint_steps: &lint_steps
   steps:
