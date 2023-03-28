@@ -137,12 +137,7 @@ push_steps: &push_steps
 push_dependencies: &push_dependencies
   requires:
     - lint
-    - lint_generate
     - test
-    - build
-
-scan_dependencies: &scan_dependencies
-  requires:
     - build
 
 filter_sandbox: &filter_sandbox
@@ -168,7 +163,6 @@ jobs:
   scan:
     <<: *defaults
     <<: *scan_steps
-
 
   build:
     <<: *defaults
