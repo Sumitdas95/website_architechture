@@ -1,48 +1,52 @@
-version: 2.1
-
-commands:
-  setup_docker:
-    steps:
-      - setup_remote_docker:
-          docker_layer_caching: true
-          reusable: true
-          version: 20.10.7
-      # Docker Hub rate limits unauthenticated requests.
-      - run:
-          name: Authenticate with hub.docker.com
-          command: docker login -u $GLOBAL_DOCKERHUB_USERNAME -p $GLOBAL_DOCKERHUB_PASSWORD
-
+# GLOBAL-ANCHORS - DockerHub Authentication changes applied - PROD-1431 / PROD-1435
+global_dockerhub_login: &global_dockerhub_login
+  run:
+    name: Authenticate with hub.docker.com - DockerHub
+    command: docker login -u $GLOBAL_DOCKERHUB_USERNAME -p $GLOBAL_DOCKERHUB_PASSWORD
 global_context: &global_context
   context:
     - org-global
-
+global_remote_docker: &global_remote_docker
+  docker_layer_caching: false # enable it only where you run `docker build`
+  version: 20.10.14
 global_dockerhub_auth: &global_dockerhub_auth
   auth:
     username: $GLOBAL_DOCKERHUB_USERNAME
     password: $GLOBAL_DOCKERHUB_PASSWORD
+version: 2.1
+x-defaults: &defaults
+  resource_class: small # see CPU usage at https://app.circleci.com/insights/gh/deliveroo/hopper
+  working_directory: /test-sonarqube
+  docker:
+    - image: deliveroo/circleci:latest
+      <<: *global_dockerhub_auth
 
-executors:
-  roo-container:
-    docker:
-      - image: deliveroo/circleci:latest
-        <<: *global_dockerhub_auth
+commands:
+  setup-environment:
+    description: "Setup requirements"
+    steps:
+      - run:
+          name: "Setup environment"
+          command: |
+            apt-get update && apt-get install wget
+            apt-get install -y openjdk-17-jre-headless
 
-lint_generate: &lint_generate_steps
-  steps:
-    - checkout
-    - setup_docker
-    - run:
-        name: Build composition
-        command: ci build
-    - run:
-        name: Ensure go code is generated consistently
-        command: |
-          ci run -u 0 --rm app sh -c 'make generate && git status; if ! git diff-index --exit-code HEAD --name-only > /dev/null; then echo "Changes found after regenerating files:"; git diff-index --exit-code HEAD --name-only; fi'
+  install-engine:
+    description: "Install Sonarqube scanner"
+    steps:
+      - run:
+          name: "Install Sonarqube scanner"
+          command: |
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARQUBE_SCANNER_VERSION}.zip
+            unzip sonar-scanner-cli-${SONARQUBE_SCANNER_VERSION}.zip
 
 lint_steps: &lint_steps
   steps:
+    - setup_remote_docker:
+        <<: *global_remote_docker
+        docker_layer_caching: true
+    - *global_dockerhub_login
     - checkout
-    - setup_docker
     - run:
         name: Build composition
         command: ci build
@@ -52,8 +56,11 @@ lint_steps: &lint_steps
 
 test_steps: &test_steps
   steps:
+    - setup_remote_docker:
+        <<: *global_remote_docker
+        docker_layer_caching: true
+    - *global_dockerhub_login
     - checkout
-    - setup_docker
     - run:
         name: Build composition
         command: ci build
@@ -62,28 +69,39 @@ test_steps: &test_steps
         command: ci run --rm app make test
 
 build_steps: &build_steps
+    steps:
+      - setup_remote_docker:
+          <<: *global_remote_docker
+          docker_layer_caching: true
+      - *global_dockerhub_login
+      - checkout
+      - run:
+          name: Build CI Image
+          command: |
+            export DOCKER_BUILDKIT=1
+            docker build --progress=plain --tag "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" --build-arg RUBY_VERSION=$(cat .ruby-version | head -n1) .
+      - run:
+          name: Save CI Image
+          command: |
+            mkdir -p workspace
+            docker save "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
+                   --output "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
+      - persist_to_workspace:
+          root: workspace
+          paths:
+            - "*.tar"
+
+scan_steps: &scan_steps
   steps:
     - checkout
-    - setup_docker
-    # Control the build from `docker-compose.ci.yml`
-    # Tag the image using the environment from hopper and circle
+    - setup-environment
+    - install-engine
     - run:
-        name: Build and Tag CI Image
+        name: "Code analysis"
         command: |
-          ci build
-          ci tag
-    # Just because the docker instance is reusable, doesn't mean it will always be used.
-    # Persist the image between Steps by saving it to the workspace.
-    - run:
-        name: Save CI Image
-        command: |
-          mkdir -p workspace
-          docker save "${CIRCLE_PROJECT_REPONAME}:${CIRCLE_SHA1}" \
-              --output "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
-    - persist_to_workspace:
-        root: workspace
-        paths:
-          - "*.tar"
+          eval ./sonar-scanner-${SONARQUBE_SCANNER_VERSION}/bin/sonar-scanner -X \
+            -Dsonar.host.url=$SONARQUBE_SANDBOX_HOST_URL \
+            -Dsonar.login=$SONARQUBE_SANDBOX_SERVER_LOGIN
 
 push_steps: &push_steps
   steps:
@@ -99,22 +117,6 @@ push_steps: &push_steps
         command: |
           `print_env ${TARGET}`
           push_image_to_ecr
-
-
-scan_image_steps: &scan_image_steps
-  steps:
-    - setup_docker
-    - checkout
-    - attach_workspace:
-        at: workspace
-    - run:
-        name: Load cached CI image
-        command: |
-          docker load --input "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
-
-    - run:
-        name: Scan
-        command: scan_container_vulnerabilities --run
 
 push_dependencies: &push_dependencies
   requires:
@@ -133,21 +135,27 @@ filter_sandbox: &filter_sandbox
       only:
         - sandbox
 
+filter_master: &filter_master
+  filters:
+    branches:
+      only:
+        - master
 jobs:
   lint:
-    executor: roo-container
+    <<: *defaults
     <<: *lint_steps
 
-  lint_generate:
-    executor: roo-container
-    <<: *lint_generate_steps
-
   test:
-    executor: roo-container
+    <<: *defaults
     <<: *test_steps
 
+  scan:
+    <<: *defaults
+    <<: *scan_steps
+
+
   build:
-    executor: roo-container
+    <<: *defaults
     <<: *build_steps
 
   push_sandbox:
@@ -155,10 +163,6 @@ jobs:
     environment:
       TARGET: sandbox
     <<: *push_steps
-
-  scan_image:
-    executor: roo-container
-    <<: *scan_image_steps
 
 workflows:
   version: 2
@@ -168,11 +172,12 @@ workflows:
       - lint:
           <<: *global_context
 
-      - lint_generate:
-          <<: *global_context
-
       - test:
           <<: *global_context
+
+      - scan:
+          <<: *global_context
+          <<: *filter_master
 
       - build:
           <<: *global_context
@@ -182,6 +187,13 @@ workflows:
           <<: *push_dependencies
           <<: *filter_sandbox
 
-      - scan_image:
-          <<: *global_context
-          <<: *scan_dependencies
+  weekly_sonar_scan:
+    jobs:
+      - scan
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
