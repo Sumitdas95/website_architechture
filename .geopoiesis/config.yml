@@ -1,8 +1,8 @@
 version: "1"
+
+scope_config: &config
+  use_tfenv: true
+  project_root: "./infrastructure"
+
 scopes:
-  test-sonarqube-production:
-    project_root: "./infrastructure"
-    shards: [global]
-  test-sonarqube-staging:
-    project_root: "./infrastructure"
-    shards: [global]
+  bnt-internal-test-go-sandbox: *config

@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/deliveroo/apm-go"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
 	"github.com/deliveroo/determinator-go"
-	"github.com/deliveroo/test-sonarqube/internal/config"
 )
 
 func ExampleInitDeterminator() {

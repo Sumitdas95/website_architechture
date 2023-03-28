@@ -1,8 +1,8 @@
 package dependencies
 
 import (
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
 	"github.com/deliveroo/determinator-go"
-	"github.com/deliveroo/test-sonarqube/internal/config"
 )
 
 func InitDeterminator(cfg config.Config, httpClientFactory HTTPClientFactory) (*determinator.CachedRetriever, error) {

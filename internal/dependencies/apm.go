@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/deliveroo/apm-go"
-	"github.com/deliveroo/test-sonarqube/internal/config"
+	"github.com/deliveroo/bnt-internal-test-go/internal/config"
 )
 
 func NewAPM(cfg *config.Config, opts ...apm.Option) (apm.Service, error) {
@@ -32,7 +32,6 @@ func NewAPM(cfg *config.Config, opts ...apm.Option) (apm.Service, error) {
 			apm.WithDataDogAgentAddr(datadogAddr),
 			apm.WithEnvironment(cfg.Hopper.Environment),
 			apm.WithReleaseID(cfg.Hopper.ReleaseID),
-			apm.WithSentryDSN(cfg.Sentry.DSN),
 			apm.WithServiceName(cfg.Hopper.ServiceName),
 			apm.WithSpanLogging(cfg.Settings.SpanLogging),
 			apm.WithStatsDAddr(statsdAddr),

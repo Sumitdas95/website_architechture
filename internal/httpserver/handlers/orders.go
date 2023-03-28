@@ -6,9 +6,9 @@ import (
 
 	"github.com/gorilla/mux"
 
+	"github.com/deliveroo/bnt-internal-test-go/internal/httpserver/gorillautils"
+	"github.com/deliveroo/bnt-internal-test-go/internal/orders"
 	"github.com/deliveroo/determinator-go"
-	"github.com/deliveroo/test-sonarqube/internal/httpserver/gorillautils"
-	"github.com/deliveroo/test-sonarqube/internal/orders"
 )
 
 type Order struct {

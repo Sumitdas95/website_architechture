@@ -30,6 +30,16 @@ commands:
           command: |
             apt-get update && apt-get install wget
             apt-get install -y openjdk-17-jre-headless
+  setup_docker:
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+          reusable: true
+          version: 20.10.7
+      # Docker Hub rate limits unauthenticated requests.
+      - run:
+          name: Authenticate with hub.docker.com
+          command: docker login -u $GLOBAL_DOCKERHUB_USERNAME -p $GLOBAL_DOCKERHUB_PASSWORD
 
   install-engine:
     description: "Install Sonarqube scanner"
@@ -39,6 +49,12 @@ commands:
           command: |
             wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-${SONARQUBE_SCANNER_VERSION}.zip
             unzip sonar-scanner-cli-${SONARQUBE_SCANNER_VERSION}.zip
+
+executors:
+  roo-container:
+    docker:
+      - image: deliveroo/circleci:latest
+        <<: *global_dockerhub_auth
 
 lint_steps: &lint_steps
   steps:
@@ -103,6 +119,33 @@ scan_steps: &scan_steps
             -Dsonar.host.url=$SONARQUBE_SANDBOX_HOST_URL \
             -Dsonar.login=$SONARQUBE_SANDBOX_SERVER_LOGIN
 
+push_steps: &push_steps
+  steps:
+    - attach_workspace:
+        at: workspace
+    - setup_docker
+    - run:
+        name: Load persisted CI image
+        command: |
+          docker load --input "workspace/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_SHA1}.tar"
+    - run:
+        name: Push image to ECR
+        command: |
+          `print_env ${TARGET}`
+          push_image_to_ecr
+
+push_dependencies: &push_dependencies
+  requires:
+    - lint
+    - test
+    - build
+
+filter_sandbox: &filter_sandbox
+  filters:
+    branches:
+      only:
+        - sandbox
+
 filter_master: &filter_master
   filters:
     branches:
@@ -121,11 +164,15 @@ jobs:
     <<: *defaults
     <<: *scan_steps
 
-
   build:
     <<: *defaults
     <<: *build_steps
 
+  push_sandbox:
+    executor: roo-container
+    environment:
+      TARGET: sandbox
+    <<: *push_steps
 
 workflows:
   version: 2
@@ -144,6 +191,11 @@ workflows:
 
       - build:
           <<: *global_context
+
+      - push_sandbox:
+          <<: *global_context
+          <<: *push_dependencies
+          <<: *filter_sandbox
 
   weekly_sonar_scan:
     jobs:
