@@ -1,0 +1,73 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine.
+# See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+executors:
+  my-executor:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  Run Consumer Contract Tests:
+    executor: my-executor
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Setup environment variables"
+          command: |
+            export PACT_BROKER_TOKEN=
+            echo "export PACT_BROKER_TOKEN=zem7v4-zav6LjAJXhn-7kw" >> $BASH_ENV
+            echo "export PACT_BROKER_URL=https://nifty50.pactflow.io" >> $BASH_ENV
+            source "$BASH_ENV"
+      - run:
+          name: "Install Prerequisites"
+          command: |
+            sudo apt-get update
+            sudo apt-get -y install ruby python3-pip
+            sudo gem install pact_broker-client
+      - run:
+          name: "Install Project Dependency Packages"
+          command: pip3 install -r requirements.txt
+      - run:
+          name: "Run Consumer Contract Tests"
+          command: pytest
+
+      - run:
+          name: "Publish Contract to Pactflow"
+          command: |
+            pact-broker publish ./tests/userserviceclient-userservice.json --consumer-app-version=3.6 --branch="feature_branch" --tag="test" --broker-base-url=$PACT_BROKER_URL --broker-token=$PACT_BROKER_TOKEN
+      - run:
+          name: "Run The Server"
+          command: |
+            python3 src/provider.py
+          background: true
+      - run:
+          name: "Verify The Pact"
+          command: pact-verifier --provider-base-url=http://127.0.0.1:5001 --pact-url=$PACT_BROKER_URL/pacts/provider/UserService/consumer/UserServiceClient/latest --pact-broker-url=$PACT_BROKER_URL --pact-broker-token=$PACT_BROKER_TOKEN --provider-app-version="3.3" --provider-version-branch="feature_branch" --provider-version-tag="test" --provider=UserService --publish-verification-results
+      - run:
+          name: "Set An Environment for Consumer"
+          command: |
+            pact-broker record-deployment --pacticipant=UserServiceClient --version=3.1 --broker-base-url=$PACT_BROKER_URL --environment=test
+      - run:
+#          If you are using a Broker version where deployment versions are supported, then you would notify the Broker of the deployment of this application version like so
+          name: "Notify Broker About The Deployment"
+          command: |
+            pact-broker record-deployment --pacticipant=UserService --version=3.3 --broker-base-url=$PACT_BROKER_URL --environment=test
+      - run:
+          name: "Can I Deploy For Provider"
+          command: |
+            pact-broker can-i-deploy --pacticipant=UserService --broker-base-url=$PACT_BROKER_URL --version=3.3 --to-environment=test
+      - run:
+          name: "Can I Deploy For Consumer"
+          command: |
+            pact-broker can-i-deploy --pacticipant=UserServiceClient --broker-base-url=$PACT_BROKER_URL --version=3.0 --to-environment=test
+            
+
+      # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  say-hello-workflow:
+    jobs:
+      - Run Consumer Contract Tests

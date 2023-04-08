@@ -1,0 +1,44 @@
+I, [2023-04-09T01:08:43.719151 #19132]  INFO -- : Cleared interactions
+I, [2023-04-09T01:08:43.734570 #19132]  INFO -- : Registered expected interaction GET /is_superuser/admin
+D, [2023-04-09T01:08:43.734570 #19132] DEBUG -- : {
+  "description": "A request for admin",
+  "providerState": "An admin should logged in",
+  "request": {
+    "method": "get",
+    "path": "/is_superuser/admin"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+    },
+    "body": {
+      "status": "success"
+    }
+  },
+  "metadata": null
+}
+I, [2023-04-09T01:08:43.751975 #19132]  INFO -- : Received request GET /is_superuser/admin
+D, [2023-04-09T01:08:43.751975 #19132] DEBUG -- : {
+  "path": "/is_superuser/admin",
+  "query": "",
+  "method": "get",
+  "headers": {
+    "Host": "127.0.0.1:5001",
+    "User-Agent": "python-requests/2.28.2",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "*/*",
+    "Connection": "keep-alive",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2023-04-09T01:08:43.751975 #19132]  INFO -- : Found matching response for GET /is_superuser/admin
+D, [2023-04-09T01:08:43.751975 #19132] DEBUG -- : {
+  "status": 200,
+  "headers": {
+  },
+  "body": {
+    "status": "success"
+  }
+}
+I, [2023-04-09T01:08:43.767329 #19132]  INFO -- : Verifying - interactions matched
+I, [2023-04-09T01:08:43.783656 #19132]  INFO -- : Writing pact for UserService to C:/Users/ssumi/Contract_Testing/Contract_Testing/circleci-demo/tests/userserviceclient-userservice.json

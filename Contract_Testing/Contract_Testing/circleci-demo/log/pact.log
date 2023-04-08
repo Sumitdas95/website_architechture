@@ -1,0 +1,296 @@
+# Logfile created on 2023-03-19 17:25:19 +0530 by logger.rb/47272
+I, [2023-03-19T17:25:19.766481 #9604]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserABc returns a response which has status code 200'
+I, [2023-03-19T17:25:19.813899 #9604]  INFO -- : Sending GET request to path: "/users/UserABc" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T17:25:19.813899 #9604] DEBUG -- : body :
+I, [2023-03-19T17:25:24.898576 #9604]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 11:55:24 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T17:25:24.899087 #9604] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T17:25:24.899087 #9604]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T17:25:24.929265 #9604]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA does not exist"}]}, see debug logs for body
+D, [2023-03-19T17:25:24.929265 #9604] DEBUG -- : body :
+I, [2023-03-19T17:25:24.945436 #9604]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 11:55:24 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T17:25:24.945436 #9604] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T17:49:25.759282 #17688]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserABc returns a response which has status code 200'
+I, [2023-03-19T17:49:30.025412 #17688]  INFO -- : Sending GET request to path: "/users/UserABc" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T17:49:30.025412 #17688] DEBUG -- : body :
+I, [2023-03-19T17:49:30.108004 #17688]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 12:19:30 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T17:49:30.108004 #17688] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T17:49:30.137744 #17688]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T17:49:30.157753 #17688]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA does not exist"}]}, see debug logs for body
+D, [2023-03-19T17:49:30.157753 #17688] DEBUG -- : body :
+I, [2023-03-19T17:49:30.181081 #17688]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 12:19:30 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T17:49:30.181081 #17688] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T18:51:47.566741 #3132]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T18:51:47.609817 #3132]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T18:51:47.611816 #3132] DEBUG -- : body :
+I, [2023-03-19T18:51:50.545285 #3132]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 13:21:50 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T18:51:50.545285 #3132] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 18:51:47 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T18:51:50.545285 #3132]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T18:51:50.575710 #3132]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA does not exist"}]}, see debug logs for body
+D, [2023-03-19T18:51:50.575710 #3132] DEBUG -- : body :
+I, [2023-03-19T18:51:50.591876 #3132]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 13:21:50 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T18:51:50.591876 #3132] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T18:53:40.084181 #10748]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T18:53:40.107038 #10748]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T18:53:40.107038 #10748] DEBUG -- : body :
+I, [2023-03-19T18:53:40.138323 #10748]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 13:23:40 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T18:53:40.138323 #10748] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 18:53:40 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T18:53:43.114590 #10748]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T18:53:43.130292 #10748]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA does not exist"}]}, see debug logs for body
+D, [2023-03-19T18:53:43.130292 #10748] DEBUG -- : body :
+I, [2023-03-19T18:53:43.147560 #10748]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 13:23:43 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T18:53:43.147560 #10748] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T18:54:24.617017 #10888]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T18:54:27.548651 #10888]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T18:54:27.548651 #10888] DEBUG -- : body :
+I, [2023-03-19T18:54:27.593639 #10888]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 13:24:27 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T18:54:27.593639 #10888] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 18:54:24 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T18:54:27.593639 #10888]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T18:54:27.625459 #10888]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA does not exist"}]}, see debug logs for body
+D, [2023-03-19T18:54:27.625459 #10888] DEBUG -- : body :
+I, [2023-03-19T18:54:27.641899 #10888]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 13:24:27 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T18:54:27.641899 #10888] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T19:59:46.334871 #9604]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T19:59:55.697479 #9604]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has a matching body'
+I, [2023-03-19T20:00:02.007235 #9604]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T20:00:34.116903 #15048]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T20:00:34.148660 #15048]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T20:00:34.148660 #15048] DEBUG -- : body :
+I, [2023-03-19T20:00:34.195584 #15048]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 14:30:34 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T20:00:34.195584 #15048] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 20:00:34 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T20:00:34.195584 #15048]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA does not exist a request for UserA with GET /users/UserA returns a response which has status code 404'
+I, [2023-03-19T20:00:34.226832 #15048]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA does not exist"}]}, see debug logs for body
+D, [2023-03-19T20:00:34.226832 #15048] DEBUG -- : body :
+I, [2023-03-19T20:00:34.242964 #15048]  INFO -- : Received response with status: 404, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 14:30:34 GMT", "Content-Type"=>"text/html; charset=utf-8", "Content-Length"=>"207", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T20:00:34.242964 #15048] DEBUG -- : body: <!doctype html>
+<html lang=en>
+<title>404 Not Found</title>
+<h1>Not Found</h1>
+<p>The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.</p>
+
+I, [2023-03-19T20:31:09.394200 #8072]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T20:31:18.811807 #8072]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has a matching body'
+I, [2023-03-19T20:34:33.457709 #13448]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T20:34:33.494468 #13448]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T20:34:33.494468 #13448] DEBUG -- : body :
+I, [2023-03-19T20:34:33.540082 #13448]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 15:04:33 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T20:34:33.540082 #13448] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 20:34:33 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T21:33:36.559168 #13508]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T21:33:36.600022 #13508]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T21:33:36.600022 #13508] DEBUG -- : body :
+I, [2023-03-19T21:33:36.663721 #13508]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:03:36 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:33:36.663721 #13508] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 21:33:36 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T21:33:36.676912 #13508]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser returns a response which has status code 200'
+I, [2023-03-19T21:33:36.695798 #13508]  INFO -- : Sending GET request to path: "/is_superuser" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:33:36.695798 #13508] DEBUG -- : body :
+I, [2023-03-19T21:33:36.711829 #13508]  INFO -- : Received response with status: 400, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:03:36 GMT", "Content-Type"=>"application/json", "Content-Length"=>"25", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:33:36.711829 #13508] DEBUG -- : body: {
+  "status": "failed"
+}
+
+I, [2023-03-19T21:36:57.406014 #12876]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T21:36:57.446259 #12876]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T21:36:57.446259 #12876] DEBUG -- : body :
+I, [2023-03-19T21:36:57.494061 #12876]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:06:57 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:36:57.494061 #12876] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 21:36:57 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T21:36:57.506322 #12876]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser returns a response which has status code 200'
+I, [2023-03-19T21:36:57.525532 #12876]  INFO -- : Sending GET request to path: "/is_superuser" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:36:57.525532 #12876] DEBUG -- : body :
+I, [2023-03-19T21:36:57.541164 #12876]  INFO -- : Received response with status: 400, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:06:57 GMT", "Content-Type"=>"application/json", "Content-Length"=>"25", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:36:57.541164 #12876] DEBUG -- : body: {
+  "status": "failed"
+}
+
+I, [2023-03-19T21:42:20.301202 #20152]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given UserA exists and is not an administrator a request for UserA with GET /users/UserA returns a response which has status code 200'
+I, [2023-03-19T21:42:20.343325 #20152]  INFO -- : Sending GET request to path: "/users/UserA" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"UserA exists and is not an administrator"}]}, see debug logs for body
+D, [2023-03-19T21:42:20.343325 #20152] DEBUG -- : body :
+I, [2023-03-19T21:42:20.390413 #20152]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:12:20 GMT", "Content-Type"=>"application/json", "Content-Length"=>"110", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:42:20.390413 #20152] DEBUG -- : body: {
+  "admin": false,
+  "created_on": "Sun, 19 Mar 2023 21:42:20 GMT",
+  "id": "1234567",
+  "name": "UserABc"
+}
+
+I, [2023-03-19T21:42:20.399942 #20152]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:42:20.422888 #20152]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:42:20.422888 #20152] DEBUG -- : body :
+I, [2023-03-19T21:42:20.438421 #20152]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:12:20 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:42:20.438421 #20152] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-19T21:45:40.402939 #19144]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:45:40.433281 #19144]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:45:40.433281 #19144] DEBUG -- : body :
+I, [2023-03-19T21:45:40.481291 #19144]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:15:40 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:45:40.481291 #19144] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-19T21:46:26.644309 #8444]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:46:26.693904 #8444]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:46:26.693904 #8444] DEBUG -- : body :
+I, [2023-03-19T21:46:26.739919 #8444]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:16:26 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:46:26.739919 #8444] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-19T21:46:59.159817 #16148]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:46:59.190845 #16148]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:46:59.190845 #16148] DEBUG -- : body :
+I, [2023-03-19T21:46:59.238968 #16148]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:16:59 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:46:59.238968 #16148] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-19T21:48:01.644655 #11148]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:48:01.693483 #11148]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:48:01.693483 #11148] DEBUG -- : body :
+I, [2023-03-19T21:48:01.741809 #11148]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:18:01 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:48:01.741809 #11148] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-19T21:49:01.617581 #20544]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:49:01.663455 #20544]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:49:01.663455 #20544] DEBUG -- : body :
+I, [2023-03-19T21:49:01.758017 #20544]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:19:01 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:49:01.758017 #20544] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-19T21:50:27.022884 #18476]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:50:27.070316 #18476]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:50:27.070316 #18476] DEBUG -- : body :
+I, [2023-03-19T21:50:27.117278 #18476]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:20:27 GMT", "Content-Type"=>"application/json", "Content-Length"=>"25", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:50:27.117278 #18476] DEBUG -- : body: {
+  "status": "succes"
+}
+
+I, [2023-03-19T21:51:00.634256 #5284]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-19T21:51:00.668082 #5284]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-19T21:51:00.668082 #5284] DEBUG -- : body :
+I, [2023-03-19T21:51:00.715446 #5284]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 19 Mar 2023 16:21:00 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-19T21:51:00.715446 #5284] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-20T17:46:16.857461 #3440]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-20T17:46:25.380111 #3440]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has a matching body'
+I, [2023-03-22T00:44:05.204906 #16796]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given Admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-22T00:44:09.556775 #16796]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"Admin should logged in"}]}, see debug logs for body
+D, [2023-03-22T00:44:09.556775 #16796] DEBUG -- : body :
+I, [2023-03-22T00:44:09.657016 #16796]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Tue, 21 Mar 2023 19:14:09 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-22T00:44:09.657016 #16796] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-26T00:01:53.130797 #19808]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given An admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-26T00:01:53.173859 #19808]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"An admin should logged in"}]}, see debug logs for body
+D, [2023-03-26T00:01:53.173859 #19808] DEBUG -- : body :
+I, [2023-03-26T00:01:53.270716 #19808]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sat, 25 Mar 2023 18:31:53 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-26T00:01:53.270716 #19808] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-26T00:01:54.035465 #19808]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given An admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-26T00:01:54.067911 #19808]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"An admin should logged in"}]}, see debug logs for body
+D, [2023-03-26T00:01:54.069587 #19808] DEBUG -- : body :
+I, [2023-03-26T00:01:54.099755 #19808]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sat, 25 Mar 2023 18:31:54 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-26T00:01:54.099755 #19808] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-26T15:30:23.371341 #14872]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given An admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-26T15:30:23.372381 #14872]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"An admin should logged in"}]}, see debug logs for body
+D, [2023-03-26T15:30:23.372381 #14872] DEBUG -- : body :
+I, [2023-03-26T15:30:23.415004 #14872]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 26 Mar 2023 10:00:23 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-26T15:30:23.415004 #14872] DEBUG -- : body: {
+  "status": "success"
+}
+
+I, [2023-03-26T15:30:34.665131 #14872]  INFO -- : Running example 'Verifying a pact between UserServiceClient and UserService Given An admin should logged in A request for admin with GET /is_superuser/admin returns a response which has status code 200'
+I, [2023-03-26T15:30:34.666120 #14872]  INFO -- : Sending GET request to path: "/is_superuser/admin" with headers: {"X_PACT_PROVIDER_STATES"=>[{"name"=>"An admin should logged in"}]}, see debug logs for body
+D, [2023-03-26T15:30:34.666120 #14872] DEBUG -- : body :
+I, [2023-03-26T15:30:34.685981 #14872]  INFO -- : Received response with status: 200, headers: {"Server"=>"Werkzeug/2.2.3 Python/3.9.13", "Date"=>"Sun, 26 Mar 2023 10:00:34 GMT", "Content-Type"=>"application/json", "Content-Length"=>"26", "Connection"=>"close"}, see debug logs for body
+D, [2023-03-26T15:30:34.685981 #14872] DEBUG -- : body: {
+  "status": "success"
+}
+

@@ -1,0 +1,31 @@
+{
+  "consumer": {
+    "name": "UserServiceClient"
+  },
+  "provider": {
+    "name": "UserService"
+  },
+  "interactions": [
+    {
+      "description": "A request for admin",
+      "providerState": "An admin should logged in",
+      "request": {
+        "method": "get",
+        "path": "/is_superuser/admin"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "status": "success"
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}
